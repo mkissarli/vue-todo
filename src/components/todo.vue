@@ -1,4 +1,3 @@
-
 <template>
 	<div class="todo">
 		<li>
@@ -7,32 +6,30 @@
 				<span v-else><del>{{ todoItem.text }}</del></span>
 			</span>
 		</li>
+		<h3> {{ value }} </h3>
 	</div>
 </template>
 
 <script lang="ts">
 	import { Component, Prop, Vue } from 'vue-property-decorator';
 
-	export interface TodoItem {
-		text:    String;
-		isCurrent: Boolean;
-	}
+	import { TodoItem } from '../interfaces/todoItem';
 
 	@Component
 	export default class Todo extends Vue {
 		  @Prop() 
 			  private todoItem!: TodoItem;
-			  //text!: 	  String;
-			  //isCurrent!: Boolean;
-		  
 		  
 		  onClick (): void {
-			//alert(this.todoItem.isCurrent);
-			if(this.todoItem.isCurrent == true){
+			  if(this.todoItem.isCurrent == true){
 				this.todoItem.isCurrent = false;
 	    	} else {
 				this.todoItem.isCurrent = true;
 	    	}	  
+		  }
+
+		  get value () {
+			  return this.$store.state.test;
 		  }
 	}
 </script>

@@ -1,9 +1,22 @@
 <template>
 	<div class="todo">
 		<li>
-			<span @click="onClick">
-				<span v-if="(todoItem.isCurrent)">{{ todoItem.text }}</span>
-				<span v-else><del>{{ todoItem.text }}</del></span>
+			<span>
+				<span v-if="todoItem.id == editId && editHappening">
+    				<input
+						type="text"
+						v-model="text"
+						@blur="cancelEdit()"
+						@keyup.enter="editItem(todoItem, text)"
+						ref="editInput">
+				</span>
+				<span v-else>
+					<span v-on:click="onClick(todoItem.id)">
+						<span v-if="(todoItem.isCurrent)">{{ todoItem.text }}</span>
+						<span v-else><del>{{ todoItem.text }}</del></span>
+					</span>
+				</span>
+				<button v-on:click="setEditItem(todoItem)"> Edit </button>
 			</span>
 		</li>
 		<h3> {{ value }} </h3>
@@ -17,19 +30,36 @@
 
 	@Component
 	export default class Todo extends Vue {
-		  @Prop() 
-			  private todoItem!: TodoItem;
-		  
-		  onClick (): void {
-			  if(this.todoItem.isCurrent == true){
-				this.todoItem.isCurrent = false;
-	    	} else {
-				this.todoItem.isCurrent = true;
-	    	}	  
+		  @Prop()
+		  		private todoItem!:     TodoItem;
+				private deleteId!:     Number;
+				private editHappening: Boolean   = false;
+				private editId:        Number    = 0;
+
+		  onClick (id: Number): void {
+			  this.$store.dispatch('toogleTodo', id);
 		  }
 
-		  get value () {
-			  return this.$store.state.test;
+		  setEditItem (item: TodoItem): void {
+			this.editId = item.id;
+			this.editHappening = true;
+			this.$nextTick(function(){
+				this.$refs.editInput.value = item.text;
+        		this.$refs.editInput.focus();
+       		});
+		  }
+
+		  editItem (item: TodoItem, newText: String): void {
+			  this.editHappening = false;
+			  this.$store.dispatch('editTodo', {id: item.id, text: newText});
+		  }
+
+		  cancelEdit () : void {
+			  this.editHappening = false;
+		  }
+
+		  startHold(id: Number) {
+
 		  }
 	}
 </script>

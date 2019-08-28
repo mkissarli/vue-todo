@@ -1,10 +1,12 @@
 <template>
 	<div class="todo-adder">
         <h3> ADD A NEW BOI </h3>
-        <input type="text" placeholder="New todo" v-model="nT">
+        <input type="text" placeholder="New todo" v-model="nT" @keydown.enter="newTodo(nT)">
 	    <br />
 	    <br />
-	    <button type="submit" v-on:click="newTodo(nT);">Add todo</button>
+	    <button type="submit" @click="newTodo(nT);">
+            Add todo
+        </button>
     </div>    
 </template>
 
@@ -16,10 +18,11 @@
 	@Component
 	export default class TodoAdder extends Vue {
 		  @Prop() 
-			  private todoItem!: TodoItem;
+              private todoItem!: TodoItem;
+              private nT!:       String;
           
           newTodo(nT: String){
-              this.$store.commit("addTodo", nT);
+              this.$store.dispatch('addTodo', nT);
           }
 	}
 </script>

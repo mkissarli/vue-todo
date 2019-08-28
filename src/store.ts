@@ -23,23 +23,47 @@ export default new Vuex.Store({
     },
   
     mutations: {
-      addTodo(state, text: String) {
+      ADD_TODO(state, text: String) {
+        var idVal: Number = state.todos.length;
+        //alert(state.todos.length);
+        //if(state.todos.length) { idVal = state.todos.length } else { idVal = 0;}
         var value = <TodoItem>{
-          id: (state.todos).length,
+          id: idVal,
           text: text,
           isCurrent: true
         };
         state.todos.push(value);
       },
-
+      TOGGLE_TODO: (state, id: Number) => {
+        var item = state.todos.find(todo => todo.id === id);
+        if(item){
+          item.isCurrent = !item.isCurrent;
+        };
+      },
+      EDIT_TODO: (state, params: {id: Number, text: String}) => {
+        var item = state.todos.find(todo => todo.id === params.id);
+        if(item){
+          item.text = params.text;
+        }
+      },
+      DELETE_TODO: (state, payload) => {
+        var index = state.todos.findIndex(todo => todo.id === payload);
+        state.todos.splice(index, 1);
+      }
     },
     actions: {
       addTodo(context, text: String) {
-        context.commit('addTodo', text);
+        context.commit('ADD_TODO', text);
       },
-      switchTodoStatus(contex, item: TodoItem){
-
-      }
+      toogleTodo(context, id: Number){
+        context.commit('TOGGLE_TODO', id);
+      },
+      editTodo(context, params: { id: Number, text: String }){
+        context.commit('EDIT_TODO', params);
+      },
+      deleteTodo(context, id: Number){
+        context.commit('DELETE_TODO');
+      } 
     }
   });
 

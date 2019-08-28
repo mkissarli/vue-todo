@@ -1,7 +1,7 @@
 <template>
 	<div class="todo">
-		<li>
-			<span>
+		<li class="list-none">
+			<span class="bg-purple-400 rounded-lg">
 				<span v-if="todoItem.id == editId && editHappening">
     				<input
 						type="text"
@@ -10,11 +10,11 @@
 						@keyup.enter="editItem(todoItem, text)"
 						ref="editInput">
 				</span>
-				<span v-else-if="todoItem.isCurrent">
+				<span class="text-center" v-else-if="todoItem.isCurrent">
 						<span v-on:click="onClick(todoItem.id)">{{ todoItem.text }}</span>
-						<button v-on:click="setEditItem(todoItem)"> Edit </button>	
+						<button class="" v-on:click="setEditItem(todoItem)"> Edit </button>	
 				</span>
-				<span v-else v-on:click="onClick(todoItem.id)"><del>{{ todoItem.text }}</del></span>
+				<span class="text-center" v-else v-on:click="onClick(todoItem.id)"><del>{{ todoItem.text }}</del></span>
 				
 			</span>
 		</li>
@@ -62,3 +62,6 @@
 		  }
 	}
 </script>
+
+<style lang="css">
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="">
     <h2>Todos</h2>
     <todo 
       v-for="item in currentTodos"

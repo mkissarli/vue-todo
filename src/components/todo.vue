@@ -10,13 +10,12 @@
 						@keyup.enter="editItem(todoItem, text)"
 						ref="editInput">
 				</span>
-				<span v-else>
-					<span v-on:click="onClick(todoItem.id)">
-						<span v-if="(todoItem.isCurrent)">{{ todoItem.text }}</span>
-						<span v-else><del>{{ todoItem.text }}</del></span>
-					</span>
+				<span v-else-if="todoItem.isCurrent">
+						<span v-on:click="onClick(todoItem.id)">{{ todoItem.text }}</span>
+						<button v-on:click="setEditItem(todoItem)"> Edit </button>	
 				</span>
-				<button v-on:click="setEditItem(todoItem)"> Edit </button>
+				<span v-else v-on:click="onClick(todoItem.id)"><del>{{ todoItem.text }}</del></span>
+				
 			</span>
 		</li>
 		<h3> {{ value }} </h3>

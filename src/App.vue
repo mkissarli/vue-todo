@@ -1,11 +1,18 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <h2>Todos</h2>
     <todo 
-      v-for="item in todos"
+      v-for="item in currentTodos"
       v-bind:todoItem="item"
       v-bind:key="item.id"
-      ></todo>
+    ></todo>
+    <h2>Done</h2>
+    <todo 
+      v-for="item in doneTodos"
+      v-bind:todoItem="item"
+      v-bind:key="item.id"
+    ></todo>
     <todoAdder></todoAdder>
   </div>
 </template>
@@ -25,30 +32,11 @@ import { TodoItem } from './interfaces/todoItem';
   },
 })
 export default class App extends Vue {
-  private items: TodoItem[] = [
-    {
-      id: 0,
-      text: 'Testing!!!!',
-      isCurrent: true,
-    },
-    {
-      id: 1,
-      text: 'And what!!!!',
-      isCurrent: true,
-    },
-    {
-      id: 2,
-      text: 'Ya Boi!!!!',
-      isCurrent: true,
-    },
-    {
-      id: 3,
-      text: 'Tipsy!!!!',
-      isCurrent: true,
-    },
-  ]
-  get todos () {
-    return this.$store.state.todos;
+  get doneTodos () {
+    return this.$store.getters.doneTodos;
+  }
+  get currentTodos () {
+    return this.$store.getters.currentTodos;
   }
 }
 </script>

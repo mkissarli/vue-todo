@@ -19,12 +19,7 @@
 			  private todoItem!: TodoItem;
           
           newTodo(nT: String){
-              var value = <TodoItem>{
-                  id: (this.$store.state.todos).length,
-                  text: nT,
-                  isCurrent: true
-              };
-              this.$store.commit("addTodo", value);
+              this.$store.commit("addTodo", nT);
           }
 	}
 </script>

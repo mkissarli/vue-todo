@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 
 //import TodoModel from './model/todoModel';
 
-import TodoItem from './components/todo.vue';
+import Todo from './components/todo.vue';
+import { TodoItem } from './interfaces/todoItem';
 
 Vue.use(Vuex)
 
@@ -11,16 +12,30 @@ export default new Vuex.Store({
     state: {
       todos: Array<TodoItem>(),
     },
-  
-    mutations: {
-      addTodo(state, todoItem: TodoItem) {
-        state.todos.push(todoItem);
-        console.log(todoItem);
+
+    getters: {
+      currentTodos: state =>{
+        return state.todos.filter(todo => todo.isCurrent)
+      },
+      doneTodos: state => {
+        return state.todos.filter(todo => !(todo.isCurrent))
       }
     },
+  
+    mutations: {
+      addTodo(state, text: String) {
+        var value = <TodoItem>{
+          id: (state.todos).length,
+          text: text,
+          isCurrent: true
+        };
+        state.todos.push(value);
+      },
+
+    },
     actions: {
-      addTodo(context, todoItem: TodoItem) {
-        context.commit('addTodo', todoItem);
+      addTodo(context, text: String) {
+        context.commit('addTodo', text);
       },
       switchTodoStatus(contex, item: TodoItem){
 

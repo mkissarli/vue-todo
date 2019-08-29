@@ -1,24 +1,24 @@
 <template>
-	<div class="todo">
-		<li class="list-none">
-			<span class="bg-purple-400 rounded-lg">
-				<span v-if="todoItem.id == editId && editHappening">
+	<div class="todo flex mb-4 justify-center">
+		<li class="list-none w-1/3">
+			<div class="bg-gray-400 rounded-lg">
+				<div v-if="todoItem.id == editId && editHappening">
     				<input
+						class="font-bold py-2 w-full h-12 px-2 focus:shadow-outline focus:bg-blue-100"
 						type="text"
 						v-model="text"
 						@blur="cancelEdit()"
 						@keyup.enter="editItem(todoItem, text)"
 						ref="editInput">
-				</span>
-				<span class="text-center" v-else-if="todoItem.isCurrent">
-						<span v-on:click="onClick(todoItem.id)">{{ todoItem.text }}</span>
-						<button class="" v-on:click="setEditItem(todoItem)"> Edit </button>	
-				</span>
-				<span class="text-center" v-else v-on:click="onClick(todoItem.id)"><del>{{ todoItem.text }}</del></span>
+				</div>
+				<div class="flex mb-4" v-else-if="todoItem.isCurrent">
+						<div class="font-bold w-5/6 h-12 py-2 px-2 " v-on:click="onClick(todoItem.id)">{{ todoItem.text }}</div>
+						<button class="btn btn-blue w-1/6 h-12" v-on:click="setEditItem(todoItem)"> Edit </button>
+				</div>
+				<div class="font-bold py-2 px-2 w-5/6 h-12 line-through" v-on:click="onClick(todoItem.id)" v-else>{{ todoItem.text }}</div>
 				
-			</span>
+			</div>
 		</li>
-		<h3> {{ value }} </h3>
 	</div>
 </template>
 
@@ -63,5 +63,15 @@
 	}
 </script>
 
-<style lang="css">
+
+<style>
+  .btn {
+    @apply font-bold align-middle px-4 rounded;
+  }
+  .btn-blue {
+    @apply bg-blue-500 text-white;
+  }
+  .btn-blue:hover {
+    @apply bg-blue-700;
+  }
 </style>

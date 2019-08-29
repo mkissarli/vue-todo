@@ -1,12 +1,12 @@
 <template>
   <div id="app" class="">
-    <h2>Todos</h2>
+    <h1 class="font-bold font-mono text-4xl font-extrabold tracking-wide text-gray-700">Todos</h1>
     <todo 
       v-for="item in currentTodos"
       v-bind:todoItem="item"
       v-bind:key="item.id"
     ></todo>
-    <h2>Done</h2>
+    <h1 class="font-bold font-mono text-4xl font-extrabold tracking-wide text-gray-700">Done</h1>
     <todo 
       v-for="item in doneTodos"
       v-bind:todoItem="item"
@@ -48,5 +48,11 @@ export default class App extends Vue {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+html,body,#app{
+  height:100%;
+  width:100%;
+  @apply bg-gray-200;
 }
 </style>

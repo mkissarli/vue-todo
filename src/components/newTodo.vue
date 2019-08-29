@@ -1,12 +1,19 @@
 <template>
-	<div class="todo-adder">
-        <h3> ADD A NEW BOI </h3>
-        <input type="text" placeholder="New todo" v-model="nT" @keydown.enter="newTodo(nT)">
-	    <br />
-	    <br />
-	    <button type="submit" @click="newTodo(nT);">
-            Add todo
-        </button>
+	<div class="todo-adder flex mb-4 justify-center">
+        <div class="w-1/3">
+            <h3 class="font-bold font-mono text-xl font-extrabold tracking-wide text-gray-700"> ADD A NEW BOI </h3>
+            <div class="flex mb-4 w-full h-12 text-center justify-center">
+                <input
+                    class="font-bold py-2 w-5/6 h-12 px-2 focus:shadow-outline focus:bg-blue-100" 
+                    type="text"
+                    placeholder="New todo"
+                    v-model="nT"
+                    @keydown.enter="newTodo(nT)">
+    	        <button class="btn btn-blue w-1/6" type="submit" @click="newTodo(nT);">
+                    Add todo
+                </button>
+            </div>
+        </div>
     </div>    
 </template>
 
@@ -26,3 +33,16 @@
           }
 	}
 </script>
+
+
+<style>
+  .btn {
+    @apply font-bold align-middle px-4 rounded;
+  }
+  .btn-blue {
+    @apply bg-blue-500 text-white;
+  }
+  .btn-blue:hover {
+    @apply bg-blue-700;
+  }
+</style>

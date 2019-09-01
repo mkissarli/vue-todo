@@ -10,7 +10,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-      todos: Array<TodoItem>(),
+      todos:           Array<TodoItem>(),
+      deleteTodo:      TodoItem,
+      deleteHappening: Boolean(),
     },
 
     getters: {
@@ -19,6 +21,18 @@ export default new Vuex.Store({
       },
       doneTodos: state => {
         return state.todos.filter(todo => !(todo.isCurrent))
+      },
+
+      deleteHappening: state => {
+        return state.deleteHappening;
+      },
+
+      todoBeingDeleted: state => {
+        if(state.deleteHappening){
+          return state.deleteTodo;
+        } else {
+          return null;
+        }
       }
     },
   
@@ -46,9 +60,16 @@ export default new Vuex.Store({
           item.text = params.text;
         }
       },
-      DELETE_TODO: (state, payload) => {
-        var index = state.todos.findIndex(todo => todo.id === payload);
+      DELETE_TODO: (state) => {
+        var index = state.todos.findIndex(todo => todo.id === state.deleteTodo.id);
         state.todos.splice(index, 1);
+      },
+      ADD_TODO_FOR_DELETE: (state, payload: TodoItem) => {
+        state.deleteHappening = true;
+        state.deleteTodo = payload;
+      },
+      REMOVE_TODO_DELETE: (state) => {
+        state.deleteHappening = false;
       }
     },
     actions: {
@@ -61,9 +82,15 @@ export default new Vuex.Store({
       editTodo(context, params: { id: Number, text: String }){
         context.commit('EDIT_TODO', params);
       },
-      deleteTodo(context, id: Number){
+      deleteTodo(context){
         context.commit('DELETE_TODO');
-      } 
+      },
+      addTodoForDelete(context, todo: TodoItem){
+        context.commit('ADD_TODO_FOR_DELETE', todo);
+      },
+      removeTodoDelete(context){
+        context.commit('REMOVE_TODO_DELETE');
+      }
     }
   });
 

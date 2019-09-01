@@ -1,6 +1,6 @@
 <template>
   <div class="todo flex mb-4 justify-center">
-    <li class="list-none w-full md:w-1/2">
+    <li class="list-none w-full md:w-1/2 lg:w-1/3">
       <div class="bg-gray-400 rounded-lg">
         <div v-if="todoItem.id == editId && editHappening">
           <input

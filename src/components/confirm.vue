@@ -1,10 +1,10 @@
 <template id="confirm">
-  <div class="confirm-model w-full md:w-2/5 lg:w-1/3">
-    <div class="confirm-window">
+  <div class="confirm-model">
+    <div class="confirm-window w-full md:w-2/3 lg:w-2/5 md:rounded-lg">
       <p>This will delete the todo. Is this okay?</p>
       <div class="actions">
-        <button class="cancel" @click="onCancel">Cancel</button>
-        <button class="confirm" @click="onConfirm">Delete</button>
+        <button class="cancel btn btn-blue" @click="onCancel">Cancel</button>
+        <button class="confirm btn btn-red" @click="onConfirm">Delete</button>
       </div>
     </div>
   </div>
@@ -34,9 +34,32 @@ export default class Confrim extends Vue {
 
 
 <style>
+.btn {
+  @apply font-bold align-middle px-4 rounded;
+}
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+.btn-blue:hover {
+  @apply bg-blue-700;
+}
+.btn-red {
+  @apply bg-red-500 text-white;
+}
+.btn-red:hover {
+  @apply bg-red-700;
+}
 .confirm-model {
-  @apply absolute left-0 bg-green-700 text-white rounded-lg text-center content-center;
-  height: 10vh;
-  top: 35vh;
+  @apply fixed left-0 top-0 w-full h-full overflow-auto;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.confirm-window {
+  @apply bg-green-300 p-8 border border-solid border-green-700;
+  margin: 15% auto; /* 15% from the top and centered */
 }
 </style>

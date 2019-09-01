@@ -6,9 +6,7 @@
     <todo v-for="item in doneTodos" v-bind:todoItem="item" v-bind:key="item.id"></todo>
     <todoAdder></todoAdder>
 
-    <transition name="appear">
-      <confirm v-if="deleteHappening"></confirm>
-    </transition>
+    <confirm v-if="deleteHappening"></confirm>
   </div>
 </template>
 

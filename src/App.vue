@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class>
+  <div id="app">
     <h1 class="font-bold font-mono text-4xl font-extrabold tracking-wide text-gray-700">Todos</h1>
     <todo v-for="item in currentTodos" v-bind:todoItem="item" v-bind:key="item.id"></todo>
     <h1 class="font-bold font-mono text-4xl font-extrabold tracking-wide text-gray-700">Done</h1>

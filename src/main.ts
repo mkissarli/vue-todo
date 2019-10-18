@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import App from './App.vue';
-
 import store from './store';
 
 import axios from 'axios';
@@ -10,8 +9,32 @@ import '@/assets/css/tailwind.css'
 
 Vue.config.productionTip = false;
 
+import VueRouter from 'vue-router';
+import Todos from './Todos.vue';
+
+Vue.use(VueRouter)
+
+const Login = {
+  template: '<div style = "border-radius:20px;background-color:cyan;width:200px;height:50px;margin:10px;font-size:25px;padding:10px;">This is router 1</div>'
+}
+
+const Signup = {
+  template: '<div>Sign up</div>'
+}
+
+const router = new VueRouter({
+  mode: 'history',
+  routes: [
+    { path: '/',
+      redirect: '/login'
+    },
+    {path: '/login', component: Login},
+    {path: '/todos', component: Todos}
+  ]
+})
+
 new Vue({
-  render: (h) => h(App),
+  router,
   store,
   methods: {
     getTodos: async function () {
@@ -21,4 +44,9 @@ new Vue({
   beforeMount() {
     this.getTodos();
   },
-}).$mount('#app');
+  created() {
+    // Prevent blank screen in Electron builds
+    this.$router.push('/')
+  },
+  render: h => h(App)
+}).$mount('#app')

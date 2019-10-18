@@ -1,5 +1,5 @@
 export interface TodoItem {
-	id:        Number;
+	id:        String;
 	text:      String;
 	isCurrent: Boolean;
 }

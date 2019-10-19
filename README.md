@@ -3,8 +3,9 @@
 ## About
 
 Simple app used to learn Vuejs, vuex, axios and typescript. Made in sync with [the backend](https://github.com/Thief3/graphql-todo-backend).
+Here's a demo of the project.
 
-## Demo
+![Demo gif](https://github.com/Thief3/vue-todo/blob/master/demo.gif)
 
 ## Project setup
 ```

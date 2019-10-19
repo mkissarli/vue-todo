@@ -1,5 +1,11 @@
 # todo-app
 
+## About
+
+Simple app used to learn Vuejs, vuex, axios and typescript. Made in sync with [the backend](https://github.com/Thief3/graphql-todo-backend).
+
+## Demo
+
 ## Project setup
 ```
 npm install

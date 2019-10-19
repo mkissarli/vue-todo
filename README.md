@@ -1,4 +1,4 @@
-# todo-app
+# Vuejs and Graphql Todo App
 
 ## About
 

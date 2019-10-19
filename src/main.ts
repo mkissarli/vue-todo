@@ -11,12 +11,10 @@ Vue.config.productionTip = false;
 
 import VueRouter from 'vue-router';
 import Todos from './Todos.vue';
+import Login from './Login.vue';
 
+import Api from './services/api';
 Vue.use(VueRouter)
-
-const Login = {
-  template: '<div style = "border-radius:20px;background-color:cyan;width:200px;height:50px;margin:10px;font-size:25px;padding:10px;">This is router 1</div>'
-}
 
 const Signup = {
   template: '<div>Sign up</div>'
@@ -42,6 +40,8 @@ new Vue({
     }
   },
   beforeMount() {
+    try { Api.headers['Authorization'] = '';}
+    catch { };
     this.getTodos();
   },
   created() {

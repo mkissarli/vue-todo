@@ -2,7 +2,7 @@ import Api from './api'
 
 export default {
   editTodo(id: string, text: string) {
-    return Api().post('', {
+    return Api.call().post('', {
       query: `
         mutation editTodo($id: ID!, $text: String!){
           editTodo(id: $id , text: $text){
@@ -23,7 +23,7 @@ export default {
     });
   },
   deleteTodo(id: string) {
-    return Api().post('', {
+    return Api.call().post('', {
       query: `
         mutation deleteTodo($id: ID!){
           deleteTodo(id: $id){
@@ -39,7 +39,7 @@ export default {
     });
   },
   addTodo(text: string) {
-    return Api().post('', {
+    return Api.call().post('', {
       query: `
         mutation addTodo($text: String!){
           addTodo(text: $text){
@@ -60,7 +60,7 @@ export default {
     });
   },
   toggleTodo(id: string) {
-    return Api().post('', {
+    return Api.call().post('', {
       query: `
         mutation toggleTodo($id: ID!){
           toggleTodo(id: $id){

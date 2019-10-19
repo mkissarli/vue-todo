@@ -1,7 +1,7 @@
 <template>
-  <div id="signup" class="w-full max-w-xs">
-    <h2>Sign up!</h2>
+  <div id="signup" class="w-full justify-center max-w-xs">
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h2>Sign up!</h2>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
         <input
@@ -28,8 +28,12 @@
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"
-          @click='doLogin(username, password)'
-        >Sign In</button>
+        >Sign Up</button>
+        <button
+          type="button"
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        ><router-link to="/login">Login</router-link>
+        </button>
         <!--<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
         Forgot Password?
         </a>-->

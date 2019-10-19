@@ -1,7 +1,7 @@
 <template>
-  <div id="login" class="w-full max-w-xs">
-    <h2> Login </h2>
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+  <div id="login" class="">
+    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mx-auto justify-center w-full max-w-xs">
+      <h2>Login</h2>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
         <input
@@ -22,14 +22,22 @@
           placeholder="******************"
           v-model="password"
         />
-        <p class="text-red-500 text-xs italic" v-bind:class="{ 'visible': noPassword }">Please choose a password.</p>
+        <p
+          class="text-red-500 text-xs italic"
+          v-bind:class="{ 'visible': noPassword }"
+        >Please choose a password.</p>
       </div>
       <div class="flex items-center justify-between">
         <button
           class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"
-          @click='doLogin(username, password)'
-        >Sign In</button>
+          @click="doLogin(username, password)"
+        >Login</button>
+        <button
+          type="button"
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          @click="doSignup(username, password)"
+        >Signup!</button>
         <!--<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
         Forgot Password?
         </a>-->
@@ -40,22 +48,66 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import userApi from './services/user';
-import Api from './services/api';
+import userApi from "./services/user";
+import Api from "./services/api";
 
 @Component
 export default class Login extends Vue {
-  noPassword: true;
+  noPassword: boolean = false;
+  errorLoggingIn: boolean = false;
+  errorSigningUp: boolean = false;
 
-  async doLogin(username: string, password: string){
-    if(password == ""){
-      noPassword = true;
+  async doLogin(username: string, password: string) {
+    if (password == "") {
+      this.noPassword = true;
     } else {
-      var response = await userApi.loginUser(username, password);
-      var token = response.data.data.loginUser.token;
-      try { Api.headers['Authorization'] = token;}
-      catch { };
-      this.$store.dispatch("getTodos")
+      var response = (await userApi.loginUser(username, password)).data.data
+        .loginUser;
+      var token = response.token;
+      if (response.success) {
+        this.errorLoggingIn = false;
+        this.errorSigningUp = false;
+        this.noPassword = false;
+
+        try {
+          Api.headers["Authorization"] = token;
+        } catch {}
+        this.$store.dispatch("getTodos");
+
+        this.$router.push({ path: "/todos" });
+      } else {
+        this.errorLoggingIn = true;
+        this.errorSigningUp = false;
+        this.noPassword = false;
+
+      }
+    }
+  }
+
+  async doSignup(username: string, password: string) {
+    if (password == "") {
+      this.noPassword = true;
+    } else {
+      var response = (await userApi.addUser(username, password)).data.data
+        .addUser;
+      var token = response.token;
+      if (response.success) {
+        this.errorLoggingIn = false;
+        this.errorSigningUp = false;
+        this.noPassword = false;
+
+        try {
+          Api.headers["Authorization"] = token;
+        } catch {}
+        this.$store.dispatch("getTodos");
+
+        this.$router.push({ path: "/todos" });
+      } else {
+        this.errorLoggingIn = false;
+        this.errorSigningUp = true;
+        this.noPassword = false;
+
+      }
     }
   }
 }

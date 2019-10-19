@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container mx-auto h-full flex justify-center">
+  <div id="app" class="container mx-auto h-full">
     <div>
       <router-link to="/signup">signup</router-link>
       <router-link to="/login">Login</router-link>
@@ -21,7 +21,7 @@ html,
 body,
 #app {
   height: 100%;
-  width: 100%;
+  width: 100vw;
   @apply bg-gray-200;
 }
 </style>

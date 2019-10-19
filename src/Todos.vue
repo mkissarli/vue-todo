@@ -1,8 +1,8 @@
 <template>
-  <div id="todos">
-    <h1 class="font-bold font-mono text-4xl font-extrabold tracking-wide text-gray-700">Todos</h1>
+  <div id="todos" class="w-full">
+    <h1 class="font-bold font-mono text-s md:text-4xl font-extrabold tracking-wide text-gray-700">Todos</h1>
     <todo v-for="item in currentTodos" v-bind:todoItem="item" v-bind:key="item.id"></todo>
-    <h1 class="font-bold font-mono text-4xl font-extrabold tracking-wide text-gray-700">Done</h1>
+    <h1 class="font-bold font-mono text-s md:text-4xl font-extrabold tracking-wide text-gray-700">Done</h1>
     <todo v-for="item in doneTodos" v-bind:todoItem="item" v-bind:key="item.id"></todo>
     <todoAdder></todoAdder>
 
@@ -52,8 +52,6 @@ export default class Todos extends Vue {
 html,
 body,
 #todos {
-  height: 100%;
-  width: 100%;
   @apply bg-gray-200;
 }
 </style>

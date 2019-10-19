@@ -18,7 +18,7 @@
         <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
         <input
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-          v-bind:class="{ 'border-red-500': noPassword }"
+          v-bind:class="{ 'border-red-500': (!noPassword || !errorLoggingIn || !errorSigningUp) }"
           id="password"
           type="password"
           placeholder="******************"
@@ -52,9 +52,7 @@
           class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           @click="doSignup(username, password)"
         >Signup!</button>
-        <!--<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-        Forgot Password?
-        </a>-->
+        </a>
       </div>
     </form>
   </div>
@@ -62,8 +60,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import userApi from "./services/user";
-import Api from "./services/api";
+import userApi from "../services/user";
+import Api from "../services/api";
 
 @Component
 export default class Login extends Vue {

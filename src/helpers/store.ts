@@ -1,20 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-//import TodoModel from './model/todoModel';
-
 import Todo from './components/todo.vue';
-import { TodoItem } from './interfaces/todoItem';
+import { TodoItem } from '../interfaces/todoItem';
 
-
-import userApi from "./services/user";
-import todoApi from "./services/todo";
+import userApi from "../services/user";
+import todoApi from "../services/todo";
 
 Vue.use(Vuex)
-
-import axios from 'axios';
-import api from './services/api';
-//axios.defaults.headers.common["Authorization"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbGlrIiwiaWQiOiI1ZGE4NzhlYmZlZTU5MzQyYjBlMzllMWUiLCJpYXQiOjE1NzEzMjIwOTF9.8V3iVf2Ax7X4g7UImx5moxhXtXyk274S_j1c-HedBTg";
 
 export default new Vuex.Store({
   state: {
@@ -46,10 +39,7 @@ export default new Vuex.Store({
 
   mutations: {
     async ADD_TODO(state, text: string) {
-      var idVal: string = (await todoApi.addTodo(text)).data.data.addTodo.todo.id.toString();
-      //var idVal: string = state.todos.length.toString();
-      //alert(state.todos.length);
-      //if(state.todos.length) { idVal = state.todos.length } else { idVal = 0;}
+      var idVal: string = (await todoApi.addTodo(text)).data.data.addTodo.todo.id;
       var value = <TodoItem>{
         id: idVal,
         text: text,
@@ -57,15 +47,15 @@ export default new Vuex.Store({
       };
       state.todos.push(value);
     },
-    async TOGGLE_TODO(state, id: Number) {
-      await todoApi.toggleTodo((id).toString());
+    async TOGGLE_TODO(state, id: string) {
+      await todoApi.toggleTodo(id);
       var item = state.todos.find(todo => todo.id === id);
       if (item) {
         item.isCurrent = !item.isCurrent;
       };
     },
-    async EDIT_TODO(state, params: { id: Number, text: string }) {
-      todoApi.editTodo(params.id.toString(), params.text);
+    async EDIT_TODO(state, params: { id: string, text: string }) {
+      todoApi.editTodo(params.id, params.text);
       var item = state.todos.find(todo => todo.id === params.id);
       if (item) {
         item.text = params.text;
@@ -89,10 +79,10 @@ export default new Vuex.Store({
     addTodo(context, text: String) {
       context.commit('ADD_TODO', text);
     },
-    toogleTodo(context, id: Number) {
+    toogleTodo(context, id: String) {
       context.commit('TOGGLE_TODO', id);
     },
-    editTodo(context, params: { id: Number, text: String }) {
+    editTodo(context, params: { id: String, text: String }) {
       context.commit('EDIT_TODO', params);
     },
     deleteTodo(context) {

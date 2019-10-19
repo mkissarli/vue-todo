@@ -45,7 +45,7 @@ export default class Todo extends Vue {
   @Prop()
   private todoItem!: TodoItem;
   private editHappening: Boolean = false;
-  private editId: Number = 0;
+  private editId: String ='';
 
   onClick(id: Number): void {
     this.$store.dispatch("toogleTodo", id);
@@ -76,7 +76,6 @@ export default class Todo extends Vue {
   startHold(id: Number) {}
 }
 </script>
-
 
 <style>
 .btn {

@@ -22,11 +22,11 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
-import Todo from "./components/todo.vue";
-import TodoAdder from "./components/newTodo.vue";
-import Confirm from "./components/confirm.vue";
+import Todo from "../components/todo.vue";
+import TodoAdder from "../components/newTodo.vue";
+import Confirm from "../components/confirm.vue";
 
-import { TodoItem } from "./interfaces/todoItem";
+import { TodoItem } from "../interfaces/todoItem";
 
 @Component({
   components: {

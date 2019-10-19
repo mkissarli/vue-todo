@@ -1,33 +1,16 @@
 import Vue from 'vue';
-import App from './App.vue';
-import store from './store';
-
-import axios from 'axios';
-axios.defaults.headers.common["Authorization"] = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hbGlrIiwiaWQiOiI1ZGE4NzhlYmZlZTU5MzQyYjBlMzllMWUiLCJpYXQiOjE1NzEzMjIwOTF9.8V3iVf2Ax7X4g7UImx5moxhXtXyk274S_j1c-HedBTg";
-
-import '@/assets/css/tailwind.css'
-
 Vue.config.productionTip = false;
 
+import '@/assets/css/tailwind.css'
+import App from './views/App.vue';
+
 import VueRouter from 'vue-router';
-import Todos from './Todos.vue';
-import Login from './Login.vue';
-import Signup from './Signup.vue';
+import router from './helpers/router';
+import store from './helpers/store';
 
 import Api from './services/api';
-Vue.use(VueRouter)
 
-const router = new VueRouter({
-  mode: 'history',
-  routes: [
-    { path: '/',
-      redirect: '/login'
-    },
-    { path: '/login',  component: Login },
-    { path: '/signup', component: Signup },
-    { path: '/todos',  component: Todos }
-  ]
-})
+Vue.use(VueRouter)
 
 new Vue({
   router,

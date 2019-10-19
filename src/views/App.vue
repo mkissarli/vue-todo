@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import userApi from "./services/user";
-import Api from "./services/api";
+import userApi from "../services/user";
+import Api from "../services/api";
 
 @Component
 export default class App extends Vue {

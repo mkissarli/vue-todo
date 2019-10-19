@@ -46,8 +46,8 @@ export default new Vuex.Store({
 
   mutations: {
     async ADD_TODO(state, text: string) {
-      //var idVal: string = (await todoApi.addTodo(text)).data.data.todo.id;
-      var idVal: string = state.todos.length.toString();
+      var idVal: string = (await todoApi.addTodo(text)).data.data.addTodo.todo.id.toString();
+      //var idVal: string = state.todos.length.toString();
       //alert(state.todos.length);
       //if(state.todos.length) { idVal = state.todos.length } else { idVal = 0;}
       var value = <TodoItem>{

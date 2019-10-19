@@ -1,6 +1,6 @@
 <template>
-  <div id="login" class="w-full max-w-xs">
-    <h2> Login </h2>
+  <div id="signup" class="w-full max-w-xs">
+    <h2>Sign up!</h2>
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
@@ -51,8 +51,8 @@ export default class Login extends Vue {
     if(password == ""){
       noPassword = true;
     } else {
-      var response = await userApi.loginUser(username, password);
-      var token = response.data.data.loginUser.token;
+      var response = await userApi.addUser(username, password);
+      var token = response.data.data.addUser.token;
       try { Api.headers['Authorization'] = token;}
       catch { };
       this.$store.dispatch("getTodos")

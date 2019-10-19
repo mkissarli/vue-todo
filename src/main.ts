@@ -12,13 +12,10 @@ Vue.config.productionTip = false;
 import VueRouter from 'vue-router';
 import Todos from './Todos.vue';
 import Login from './Login.vue';
+import Signup from './Signup.vue';
 
 import Api from './services/api';
 Vue.use(VueRouter)
-
-const Signup = {
-  template: '<div>Sign up</div>'
-}
 
 const router = new VueRouter({
   mode: 'history',
@@ -27,6 +24,7 @@ const router = new VueRouter({
       redirect: '/login'
     },
     {path: '/login', component: Login},
+    {path: '/signup', component: Signup},
     {path: '/todos', component: Todos}
   ]
 })
